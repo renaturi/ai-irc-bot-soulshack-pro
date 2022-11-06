@@ -2,4 +2,6 @@
 version: 2
 updates:
   # Maintain dependencies for GitHub Actions
-  - package-ecosys
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    sch
