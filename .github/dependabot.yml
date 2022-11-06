@@ -1,4 +1,5 @@
 ---
 version: 2
 updates:
-  # Maintain d
+  # Maintain dependencies for GitHub Actions
+  - package-ecosys
