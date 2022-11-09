@@ -4,4 +4,6 @@ if [ -z "$TAG" ]; then
   TAG="soulshack:dev"
 fi
 
-echo "buildin
+echo "building with tag: $TAG"
+
+docker build . -t "$TAG"
