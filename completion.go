@@ -7,4 +7,7 @@ import (
 	"io"
 	"time"
 
-	ai "github.com/sashabaranov/go-open
+	ai "github.com/sashabaranov/go-openai"
+)
+
+func ChatCompletionTask(ctx *ChatContext)
