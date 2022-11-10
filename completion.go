@@ -3,4 +3,8 @@ package main
 import (
 	"bytes"
 	"context"
-	"erro
+	"errors"
+	"io"
+	"time"
+
+	ai "github.com/sashabaranov/go-open
