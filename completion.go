@@ -11,4 +11,5 @@ import (
 )
 
 func ChatCompletionTask(ctx *ChatContext) <-chan *string {
-	ch := make(chan *stri
+	ch := make(chan *string)
+	go chatCompletionStream(ctx
