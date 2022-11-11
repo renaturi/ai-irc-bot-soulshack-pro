@@ -16,4 +16,4 @@ func ChatCompletionTask(ctx *ChatContext) <-chan *string {
 	return ch
 }
 
-func chatCompletionStr
+func chatCompletionStream(cc *ChatContext, channel chan<- *st
