@@ -10,4 +10,5 @@ import (
 	ai "github.com/sashabaranov/go-openai"
 )
 
-func ChatCompletionTask(ctx *ChatContext)
+func ChatCompletionTask(ctx *ChatContext) <-chan *string {
+	ch := make(chan *stri
