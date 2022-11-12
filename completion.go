@@ -21,4 +21,5 @@ func chatCompletionStream(cc *ChatContext, channel chan<- *string) {
 	defer close(channel)
 	cc.Stats()
 
-	ctx, cancel := context.WithTimeout(cc, cc.Session.Co
+	ctx, cancel := context.WithTimeout(cc, cc.Session.Config.ClientTimeout)
+	defer cancel()
