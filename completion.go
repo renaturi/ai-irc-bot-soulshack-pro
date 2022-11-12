@@ -16,4 +16,9 @@ func ChatCompletionTask(ctx *ChatContext) <-chan *string {
 	return ch
 }
 
-func chatCompletionStream(cc *ChatContext, channel chan<- *st
+func chatCompletionStream(cc *ChatContext, channel chan<- *string) {
+
+	defer close(channel)
+	cc.Stats()
+
+	ctx
