@@ -26,3 +26,5 @@ func chatCompletionStream(cc *ChatContext, channel chan<- *string) {
 
 	stream, err := cc.AI.CreateChatCompletionStream(ctx, ai.ChatCompletionRequest{
 		MaxTokens: cc.Session.Config.MaxTokens,
+		Model:     cc.Personality.Model,
+		Messag
