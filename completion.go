@@ -24,4 +24,4 @@ func chatCompletionStream(cc *ChatContext, channel chan<- *string) {
 	ctx, cancel := context.WithTimeout(cc, cc.Session.Config.ClientTimeout)
 	defer cancel()
 
-	stream, err := cc.AI.CreateChatCompleti
+	stream, err := cc.AI.CreateChatCompletionStream(ctx, ai.ChatCompletionRe
