@@ -28,4 +28,8 @@ func chatCompletionStream(cc *ChatContext, channel chan<- *string) {
 		MaxTokens: cc.Session.Config.MaxTokens,
 		Model:     cc.Personality.Model,
 		Messages:  cc.Session.GetHistory(),
-		Stre
+		Stream:    true,
+	})
+
+	if err != nil {
+		senderror
