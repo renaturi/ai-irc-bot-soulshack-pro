@@ -36,4 +36,6 @@ func chatCompletionStream(cc *ChatContext, channel chan<- *string) {
 		return
 	}
 
-	defer stream.C
+	defer stream.Close()
+	chunker := &Chunker{
+		Si
