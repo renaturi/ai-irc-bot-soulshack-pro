@@ -32,4 +32,8 @@ func chatCompletionStream(cc *ChatContext, channel chan<- *string) {
 	})
 
 	if err != nil {
-		senderror
+		senderror(err, channel)
+		return
+	}
+
+	defer stream.C
