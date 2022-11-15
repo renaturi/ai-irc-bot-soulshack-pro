@@ -39,4 +39,5 @@ func chatCompletionStream(cc *ChatContext, channel chan<- *string) {
 	defer stream.Close()
 	chunker := &Chunker{
 		Size:    cc.Session.Config.Chunkmax,
-		L
+		Last:    time.Now(),
+		Timeout: cc.Sess
