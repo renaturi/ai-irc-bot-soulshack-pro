@@ -46,4 +46,5 @@ func chatCompletionStream(cc *ChatContext, channel chan<- *string) {
 
 	for {
 		response, err := stream.Recv()
-		i
+		if err != nil {
+			send(chunker.Buffer.String(),
