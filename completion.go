@@ -41,4 +41,9 @@ func chatCompletionStream(cc *ChatContext, channel chan<- *string) {
 		Size:    cc.Session.Config.Chunkmax,
 		Last:    time.Now(),
 		Timeout: cc.Session.Config.Chunkdelay,
-		Buffer:  &bytes.Buf
+		Buffer:  &bytes.Buffer{},
+	}
+
+	for {
+		response, err := stream.Recv()
+		i
