@@ -51,4 +51,6 @@ func chatCompletionStream(cc *ChatContext, channel chan<- *string) {
 			if !errors.Is(err, io.EOF) {
 				senderror(err, channel)
 			}
-			re
+			return
+		}
+		if len(response.Choices) != 0
