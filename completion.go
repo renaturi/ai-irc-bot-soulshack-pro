@@ -54,4 +54,6 @@ func chatCompletionStream(cc *ChatContext, channel chan<- *string) {
 			return
 		}
 		if len(response.Choices) != 0 {
-			chunker.Buffer.WriteString(respon
+			chunker.Buffer.WriteString(response.Choices[0].Delta.Content)
+		}
+		fo
