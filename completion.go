@@ -60,3 +60,10 @@ func chatCompletionStream(cc *ChatContext, channel chan<- *string) {
 			if ready, chunk := chunker.Chunk(); ready {
 				send(string(*chunk), channel)
 			} else {
+				break
+			}
+		}
+	}
+}
+
+func senderro
