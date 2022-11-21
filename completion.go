@@ -66,4 +66,5 @@ func chatCompletionStream(cc *ChatContext, channel chan<- *string) {
 	}
 }
 
-func senderro
+func senderror(err error, channel chan<- *string) {
+	e := 
