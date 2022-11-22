@@ -72,4 +72,7 @@ func senderror(err error, channel chan<- *string) {
 }
 
 func send(chunk string, channel chan<- *string) {
-	c
+	channel <- &chunk
+}
+
+type Chunker struct 
