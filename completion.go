@@ -71,4 +71,5 @@ func senderror(err error, channel chan<- *string) {
 	channel <- &e
 }
 
-func send
+func send(chunk string, channel chan<- *string) {
+	c
