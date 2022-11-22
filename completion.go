@@ -67,4 +67,8 @@ func chatCompletionStream(cc *ChatContext, channel chan<- *string) {
 }
 
 func senderror(err error, channel chan<- *string) {
-	e := 
+	e := err.Error()
+	channel <- &e
+}
+
+func send
