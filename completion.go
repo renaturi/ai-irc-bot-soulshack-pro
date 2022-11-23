@@ -75,4 +75,8 @@ func send(chunk string, channel chan<- *string) {
 	channel <- &chunk
 }
 
-type Chunker struct 
+type Chunker struct {
+	Size    int
+	Last    time.Time
+	Buffer  *bytes.Buffer
+	
