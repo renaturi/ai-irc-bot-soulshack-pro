@@ -79,4 +79,7 @@ type Chunker struct {
 	Size    int
 	Last    time.Time
 	Buffer  *bytes.Buffer
-	
+	Timeout time.Duration
+}
+
+func (
