@@ -82,4 +82,6 @@ type Chunker struct {
 	Timeout time.Duration
 }
 
-func (
+func (c *Chunker) Chunk() (bool, *[]byte) {
+
+	end
