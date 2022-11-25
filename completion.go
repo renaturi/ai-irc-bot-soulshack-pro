@@ -85,4 +85,8 @@ type Chunker struct {
 func (c *Chunker) Chunk() (bool, *[]byte) {
 
 	end := c.Size
-	if c.Buffer.Len() < 
+	if c.Buffer.Len() < end {
+		end = c.Buffer.Len()
+	}
+
+	// chunk on a newline i
