@@ -89,4 +89,5 @@ func (c *Chunker) Chunk() (bool, *[]byte) {
 		end = c.Buffer.Len()
 	}
 
-	// chunk on a newline i
+	// chunk on a newline in first chunksize
+	index := bytes.
