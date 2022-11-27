@@ -90,4 +90,4 @@ func (c *Chunker) Chunk() (bool, *[]byte) {
 	}
 
 	// chunk on a newline in first chunksize
-	index := bytes.
+	index := bytes.IndexByte(c.Buffer.Bytes()[:end], '
