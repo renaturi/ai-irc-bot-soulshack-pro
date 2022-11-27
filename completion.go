@@ -94,3 +94,7 @@ func (c *Chunker) Chunk() (bool, *[]byte) {
 	if index != -1 {
 		chunk := c.Buffer.Next(index + 1)
 		c.Last = time.Now()
+		return true, &chunk
+	}
+
+	// chunk if ful
