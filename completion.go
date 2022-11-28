@@ -98,4 +98,5 @@ func (c *Chunker) Chunk() (bool, *[]byte) {
 	}
 
 	// chunk if full buffer satisfies chunk size
-	if c.Buffer.L
+	if c.Buffer.Len() >= c.Size {
+		chunk := c.Buffer.Next(c.Size
