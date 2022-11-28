@@ -97,4 +97,5 @@ func (c *Chunker) Chunk() (bool, *[]byte) {
 		return true, &chunk
 	}
 
-	// chunk if ful
+	// chunk if full buffer satisfies chunk size
+	if c.Buffer.L
