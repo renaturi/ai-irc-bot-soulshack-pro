@@ -104,4 +104,5 @@ func (c *Chunker) Chunk() (bool, *[]byte) {
 		return true, &chunk
 	}
 
-	// chunk on boundary if n seconds 
+	// chunk on boundary if n seconds have passed since the last chunk
+	if time.Sin
