@@ -102,3 +102,6 @@ func (c *Chunker) Chunk() (bool, *[]byte) {
 		chunk := c.Buffer.Next(c.Size)
 		c.Last = time.Now()
 		return true, &chunk
+	}
+
+	// chunk on boundary if n seconds 
