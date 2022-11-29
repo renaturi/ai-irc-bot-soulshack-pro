@@ -99,4 +99,6 @@ func (c *Chunker) Chunk() (bool, *[]byte) {
 
 	// chunk if full buffer satisfies chunk size
 	if c.Buffer.Len() >= c.Size {
-		chunk := c.Buffer.Next(c.Size
+		chunk := c.Buffer.Next(c.Size)
+		c.Last = time.Now()
+		return true, &chunk
