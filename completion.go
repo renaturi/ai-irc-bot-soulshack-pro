@@ -105,4 +105,5 @@ func (c *Chunker) Chunk() (bool, *[]byte) {
 	}
 
 	// chunk on boundary if n seconds have passed since the last chunk
-	if time.Sin
+	if time.Since(c.Last) >= c.Timeout {
+		content := c.Buffer.B
