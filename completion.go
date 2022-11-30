@@ -109,4 +109,5 @@ func (c *Chunker) Chunk() (bool, *[]byte) {
 		content := c.Buffer.Bytes()
 		index := c.Boundary(&content)
 		if index != -1 {
-			chunk := c.Buffer
+			chunk := c.Buffer.Next(index + 1)
+			c.Last = time
