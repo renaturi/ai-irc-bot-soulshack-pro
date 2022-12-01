@@ -115,4 +115,8 @@ func (c *Chunker) Chunk() (bool, *[]byte) {
 		}
 	}
 
-	// n
+	// no chunk
+	return false, nil
+}
+
+// oth
