@@ -120,4 +120,6 @@ func (c *Chunker) Chunk() (bool, *[]byte) {
 }
 
 // other languages are a thing, but for now...
-func (c *Chunker) Boundary(s *[]byte)
+func (c *Chunker) Boundary(s *[]byte) int {
+	for i := 0; i < len(*s)-1; i++ {
+		if ((*s)[
