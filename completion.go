@@ -119,4 +119,5 @@ func (c *Chunker) Chunk() (bool, *[]byte) {
 	return false, nil
 }
 
-// other languages are a thing, but for now.
+// other languages are a thing, but for now...
+func (c *Chunker) Boundary(s *[]byte)
