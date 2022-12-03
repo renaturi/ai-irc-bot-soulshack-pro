@@ -25,3 +25,32 @@ func TestChunker_Chunk(t *testing.T) {
 			expected: []byte("Hello\n"),
 		},
 		{
+			name:     "chunk on buffer size",
+			input:    "Hello",
+			size:     5,
+			expected: []byte("Hello"),
+		},
+		{
+			name:     "no chunk",
+			input:    "Hello",
+			size:     10,
+			expected: []byte(""),
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			c := &Chunker{
+				Size:    tt.size,
+				Last:    time.Now(),
+				Buffer:  &bytes.Buffer{},
+				Timeout: timeout,
+			}
+			c.Buffer.WriteString(tt.input)
+
+			chunked, chunk := c.Chunk()
+			if chunked && string(*chunk) != string(tt.expected) {
+				t.Errorf("Chunk() got = %v, want = %v", chunk, tt.expected)
+			}
+		})
+	}
