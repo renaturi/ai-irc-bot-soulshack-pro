@@ -126,4 +126,5 @@ func (c *Chunker) Boundary(s *[]byte) int {
 			return i + 1
 		}
 	}
-	retu
+	return -1
+}
