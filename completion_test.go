@@ -54,3 +54,34 @@ func TestChunker_Chunk(t *testing.T) {
 			}
 		})
 	}
+}
+
+// Test for chunking based on timeout
+func TestChunker_Chunk_Timeout(t *testing.T) {
+	timeout := 100 * time.Millisecond
+
+	c := &Chunker{
+		Size:    50,
+		Last:    time.Now(),
+		Buffer:  &bytes.Buffer{},
+		Timeout: timeout,
+	}
+	c.Buffer.WriteString("Hello world! How are you?")
+
+	// Wait for timeout duration
+	time.Sleep(500 * time.Millisecond)
+
+	chunked, chunk := c.Chunk()
+	expected := []byte("Hello world! ")
+	if chunked && string(*chunk) != string(expected) {
+		t.Errorf("Chunk() got = %v, want = %v", chunk, expected)
+	}
+}
+
+func generateRandomText(size int) string {
+	const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789                   ............!?\n"
+	result := make([]byte, size)
+	for i := range result {
+		result[i] = charset[rand.Intn(len(charset))]
+	}
+	return string(result)
