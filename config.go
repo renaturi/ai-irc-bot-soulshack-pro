@@ -46,3 +46,34 @@ func init() {
 	// timeouts and behavior
 	root.PersistentFlags().BoolP("addressed", "a", true, "require bot be addressed by nick for response")
 	root.PersistentFlags().DurationP("session", "S", time.Minute*3, "duration for the chat session; message context will be cleared after this time")
+	root.PersistentFlags().DurationP("timeout", "t", time.Second*60, "timeout for each completion request to openai")
+	root.PersistentFlags().IntP("history", "H", 15, "maximum number of lines of context to keep per session")
+	root.PersistentFlags().DurationP("chunkdelay", "C", time.Second*15, "after this delay, bot will look to split the incoming buffer on sentence boundaries")
+	root.PersistentFlags().IntP("chunkmax", "m", 350, "maximum number of characters to send as a single message")
+
+	// personality / prompting
+	root.PersistentFlags().String("goodbye", "goodbye.", "prompt to be used when the bot leaves the channel")
+	root.PersistentFlags().String("greeting", "hello.", "prompt to be used when the bot joins the channel")
+	root.PersistentFlags().String("prompt", "respond in a short text:", "initial system prompt for the ai")
+
+	vip.BindPFlags(root.PersistentFlags())
+
+	vip.SetEnvPrefix("SOULSHACK")
+	vip.AutomaticEnv()
+}
+
+func initConfig() {
+
+	fmt.Println(getBanner())
+
+	if _, err := os.Stat(vip.GetString("directory")); errors.Is(err, fs.ErrNotExist) {
+		log.Printf("? configuration directory %s does not exist", vip.GetString("directory"))
+	}
+
+	if vip.GetBool("list") {
+		personalities := listPersonalities()
+		log.Printf("Available personalities: %s", strings.Join(personalities, ", "))
+		os.Exit(0)
+	}
+
+	vip.AddConfigPath(vip.GetString("directory"))
