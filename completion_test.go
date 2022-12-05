@@ -85,3 +85,31 @@ func generateRandomText(size int) string {
 		result[i] = charset[rand.Intn(len(charset))]
 	}
 	return string(result)
+}
+
+func BenchmarkChunker_StressTest(b *testing.B) {
+	timeout := 1 * time.Nanosecond
+	// Test with different buffer sizes
+	bufferSizes := []int{500, 1000, 5000, 10000}
+
+	for _, bufSize := range bufferSizes {
+		// Generate random text
+		text := generateRandomText(bufSize)
+		b.ResetTimer()
+		b.Run(fmt.Sprintf("StressTest_BufferSize_%d", bufSize), func(b *testing.B) {
+			for i := 0; i < b.N; i++ {
+				c := &Chunker{
+					Size:    40,
+					Last:    time.Now(),
+					Buffer:  &bytes.Buffer{},
+					Timeout: timeout,
+				}
+				c.Buffer.WriteString(text)
+
+				// Continuously call Chunk() until no chunks are left
+				for chunked, _ := c.Chunk(); chunked; chunked, _ = c.Chunk() {
+				}
+			}
+		})
+	}
+}
