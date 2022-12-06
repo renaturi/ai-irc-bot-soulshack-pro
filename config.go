@@ -77,3 +77,42 @@ func initConfig() {
 	}
 
 	vip.AddConfigPath(vip.GetString("directory"))
+	vip.SetConfigName(vip.GetString("become"))
+
+	if err := vip.ReadInConfig(); err != nil {
+		log.Println("? no personality file found:", vip.GetString("become"))
+	} else {
+		log.Println("using personality file:", vip.ConfigFileUsed())
+	}
+}
+
+func verifyConfig(v *vip.Viper) error {
+	for _, varName := range v.AllKeys() {
+		if varName == "admins" || varName == "saslnick" || varName == "saslpass" {
+			continue
+		}
+		value := v.GetString(varName)
+		if value == "" {
+			return fmt.Errorf("! %s unset. use --%s flag, personality config, or SOULSHACK_%s env", varName, varName, strings.ToUpper(varName))
+		}
+
+		if v.GetBool("verbose") {
+			if varName == "openaikey" {
+				value = strings.Repeat("*", len(value))
+			}
+			log.Printf("\t%s: '%s'", varName, value)
+		}
+	}
+	return nil
+}
+
+func listPersonalities() []string {
+	files, err := os.ReadDir(vip.GetString("directory"))
+	if err != nil {
+		log.Fatal(err)
+	}
+	var personalities []string
+	for _, file := range files {
+		if filepath.Ext(file.Name()) == ".yml" {
+			personalities = append(personalities, strings.TrimSuffix(file.Name(), filepath.Ext(file.Name())))
+		}
