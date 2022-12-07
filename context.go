@@ -137,3 +137,18 @@ func CreateChatContext(parent context.Context, ai *ai.Client, v *vip.Viper, c *g
 
 	if ctx.IsAddressed() {
 		ctx.Args = ctx.Args[1:]
+	}
+
+	if e.Source == nil {
+		e.Source = &girc.Source{
+			Name: vip.GetString("channel"),
+		}
+	}
+
+	key := e.Params[0]
+	if !girc.IsValidChannel(key) {
+		key = e.Source.Name
+	}
+	ctx.Session = sessions.Get(key)
+	return ctx, cancel
+}
