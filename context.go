@@ -95,3 +95,45 @@ func (c *ChatContext) Stats() {
 		c.Session.Totalchars,
 		c.Session.Config.MaxTokens,
 		c.Personality.Model)
+}
+
+func (c *ChatContext) Reply(message string) *ChatContext {
+	c.Client.Cmd.Reply(*c.Event, message)
+	return c
+}
+
+func (c *ChatContext) Valid() bool {
+	// check if the message is addressed to the bot or if being addressed is not required
+	addressed := c.IsAddressed() || !c.Config.Addressed
+	hasArguments := len(c.Args) > 0
+
+	// valid if:
+	// - the message is either addressed to the bot or being addressed is not required
+	// - or the message is private
+	// - and at least one argument
+	return (addressed || c.IsPrivate()) && hasArguments
+}
+
+func (c *ChatContext) IsPrivate() bool {
+	return !strings.HasPrefix(c.Event.Params[0], "#")
+}
+
+func (c *ChatContext) GetCommand() string {
+	return strings.ToLower(c.Args[0])
+}
+
+func CreateChatContext(parent context.Context, ai *ai.Client, v *vip.Viper, c *girc.Client, e *girc.Event) (*ChatContext, context.CancelFunc) {
+	timedctx, cancel := context.WithTimeout(parent, v.GetDuration("timeout"))
+
+	ctx := &ChatContext{
+		Context:     timedctx,
+		AI:          ai,
+		Client:      c,
+		Event:       e,
+		Args:        strings.Fields(e.Last()),
+		Personality: PersonalityFromViper(v),
+		Config:      IrcFromViper(v),
+	}
+
+	if ctx.IsAddressed() {
+		ctx.Args = ctx.Args[1:]
