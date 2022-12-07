@@ -62,3 +62,36 @@ func IrcFromViper(v *vip.Viper) *Config {
 		Server:    v.GetString("server"),
 		Port:      v.GetInt("port"),
 		SSL:       v.GetBool("ssl"),
+		Addressed: v.GetBool("addressed"),
+	}
+}
+
+// merge in the viper config
+func (c *ChatContext) SetConfig(v *vip.Viper) {
+	c.Personality = PersonalityFromViper(v)
+}
+
+func (s *ChatContext) IsAddressed() bool {
+	return strings.HasPrefix(s.Event.Last(), s.Client.GetNick())
+}
+
+func (c *ChatContext) IsAdmin() bool {
+	admins := vip.GetStringSlice("admins")
+	nick := c.Event.Source.Name
+	if len(admins) == 0 {
+		return true
+	}
+	for _, user := range admins {
+		if user == nick {
+			return true
+		}
+	}
+	return false
+}
+
+func (c *ChatContext) Stats() {
+	log.Printf("session: messages %d, bytes %d, maxtokens %d, model %s",
+		len(c.Session.GetHistory()),
+		c.Session.Totalchars,
+		c.Session.Config.MaxTokens,
+		c.Personality.Model)
