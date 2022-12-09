@@ -7,4 +7,8 @@ require (
 	github.com/sashabaranov/go-openai v1.7.0
 	github.com/spf13/cobra v1.7.0
 	github.com/spf13/viper v1.15.0
-	github.com/stretchr/
+	github.com/stretchr/testify v1.8.2
+)
+
+require (
+	g
