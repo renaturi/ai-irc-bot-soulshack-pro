@@ -9,4 +9,7 @@ import (
 
 	"github.com/google/uuid"
 	ai "github.com/sashabaranov/go-openai"
-	vip "github.com/spf1
+	vip "github.com/spf13/viper"
+)
+
+func sendGreeting(ctx
