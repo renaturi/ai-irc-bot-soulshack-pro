@@ -12,4 +12,5 @@ import (
 	vip "github.com/spf13/viper"
 )
 
-func sendGreeting(ctx
+func sendGreeting(ctx *ChatContext) {
+	log.Println("sending greeting
