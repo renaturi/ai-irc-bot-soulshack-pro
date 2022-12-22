@@ -8,4 +8,5 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	ai "github.co
+	ai "github.com/sashabaranov/go-openai"
+	vip "github.com/spf1
