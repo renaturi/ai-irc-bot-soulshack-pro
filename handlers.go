@@ -13,4 +13,5 @@ import (
 )
 
 func sendGreeting(ctx *ChatContext) {
-	log.Println("sending greeting
+	log.Println("sending greeting...")
+	ctx.Session.Message(ctx, ai.ChatM
