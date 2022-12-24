@@ -14,4 +14,4 @@ import (
 
 func sendGreeting(ctx *ChatContext) {
 	log.Println("sending greeting...")
-	ctx.Session.Message(ctx, ai.ChatM
+	ctx.Session.Message(ctx, ai.ChatMessageRoleAssistant, ctx.Personality.Greeting)
