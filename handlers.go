@@ -20,4 +20,4 @@ func sendGreeting(ctx *ChatContext) {
 	ctx.Session.Reset()
 }
 
-func spoolFromChannel(ctx *ChatC
+func spoolFromChannel(ctx *ChatContext, msgch <-chan *string) *strin
