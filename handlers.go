@@ -17,4 +17,7 @@ func sendGreeting(ctx *ChatContext) {
 	ctx.Session.Message(ctx, ai.ChatMessageRoleAssistant, ctx.Personality.Greeting)
 	rch := ChatCompletionTask(ctx)
 	_ = spoolFromChannel(ctx, rch)
-	ctx.Session.R
+	ctx.Session.Reset()
+}
+
+func spoolFromChannel(ctx *ChatC
