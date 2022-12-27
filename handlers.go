@@ -30,4 +30,5 @@ func spoolFromChannel(ctx *ChatContext, msgch <-chan *string) *string {
 	return &s
 }
 
-func sendMessage(ctx *ChatC
+func sendMessage(ctx *ChatContext, message *string) {
+	log.P
