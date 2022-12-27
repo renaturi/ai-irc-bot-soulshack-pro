@@ -24,4 +24,7 @@ func spoolFromChannel(ctx *ChatContext, msgch <-chan *string) *string {
 	all := strings.Builder{}
 	for reply := range msgch {
 		all.WriteString(*reply)
-		sendMessage(c
+		sendMessage(ctx, reply)
+	}
+	s := all.String()
+	
