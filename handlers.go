@@ -22,4 +22,6 @@ func sendGreeting(ctx *ChatContext) {
 
 func spoolFromChannel(ctx *ChatContext, msgch <-chan *string) *string {
 	all := strings.Builder{}
-	for reply := ra
+	for reply := range msgch {
+		all.WriteString(*reply)
+		sendMessage(c
