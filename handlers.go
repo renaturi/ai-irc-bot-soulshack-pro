@@ -31,4 +31,4 @@ func spoolFromChannel(ctx *ChatContext, msgch <-chan *string) *string {
 }
 
 func sendMessage(ctx *ChatContext, message *string) {
-	log.P
+	log.Println("<<", ctx.Personality.Nick, *messag
