@@ -35,4 +35,4 @@ func sendMessage(ctx *ChatContext, message *string) {
 	ctx.Reply(*message)
 }
 
-var con
+var configParams = map[string]string{"prompt": "", "model"
