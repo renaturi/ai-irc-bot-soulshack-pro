@@ -37,4 +37,6 @@ func sendMessage(ctx *ChatContext, message *string) {
 
 var configParams = map[string]string{"prompt": "", "model": "", "nick": "", "greeting": "", "goodbye": "", "directory": "", "session": "", "addressed": ""}
 
-func handleSet(ct
+func handleSet(ctx *ChatContext) {
+
+	if !ctx.IsAdmin() {
