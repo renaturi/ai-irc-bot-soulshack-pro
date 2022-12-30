@@ -45,4 +45,4 @@ func handleSet(ctx *ChatContext) {
 	}
 
 	if len(ctx.Args) < 3 {
-		ctx.Re
+		ctx.Reply(fmt.Sprintf("Usage: /set %s <value
