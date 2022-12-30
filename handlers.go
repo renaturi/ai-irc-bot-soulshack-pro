@@ -40,4 +40,5 @@ var configParams = map[string]string{"prompt": "", "model": "", "nick": "", "gre
 func handleSet(ctx *ChatContext) {
 
 	if !ctx.IsAdmin() {
-		ctx.Reply("You don't have perm
+		ctx.Reply("You don't have permission to perform this action.")
+		return
