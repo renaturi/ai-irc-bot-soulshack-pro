@@ -42,3 +42,7 @@ func handleSet(ctx *ChatContext) {
 	if !ctx.IsAdmin() {
 		ctx.Reply("You don't have permission to perform this action.")
 		return
+	}
+
+	if len(ctx.Args) < 3 {
+		ctx.Re
