@@ -51,4 +51,5 @@ func handleSet(ctx *ChatContext) {
 
 	param, v := ctx.Args[1], ctx.Args[2:]
 	value := strings.Join(v, " ")
-	
+	if _, ok := configParams[param]; !ok {
+		ctx.
