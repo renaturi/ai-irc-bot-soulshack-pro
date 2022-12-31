@@ -47,3 +47,6 @@ func handleSet(ctx *ChatContext) {
 	if len(ctx.Args) < 3 {
 		ctx.Reply(fmt.Sprintf("Usage: /set %s <value>", keysAsString(configParams)))
 		return
+	}
+
+	param, v := ctx.Args[1], ctx.
