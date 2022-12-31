@@ -49,4 +49,6 @@ func handleSet(ctx *ChatContext) {
 		return
 	}
 
-	param, v := ctx.Args[1], ctx.
+	param, v := ctx.Args[1], ctx.Args[2:]
+	value := strings.Join(v, " ")
+	
