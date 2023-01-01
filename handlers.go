@@ -52,4 +52,8 @@ func handleSet(ctx *ChatContext) {
 	param, v := ctx.Args[1], ctx.Args[2:]
 	value := strings.Join(v, " ")
 	if _, ok := configParams[param]; !ok {
-		ctx.Reply(fmt.Sprintf("Unknown parameter. Supported parameters: %v", keysAsString(c
+		ctx.Reply(fmt.Sprintf("Unknown parameter. Supported parameters: %v", keysAsString(configParams)))
+		return
+	}
+
+	// set on glob
