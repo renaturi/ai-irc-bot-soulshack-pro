@@ -56,4 +56,6 @@ func handleSet(ctx *ChatContext) {
 		return
 	}
 
-	// set on glob
+	// set on global config
+	vip.Set(param, value)
+	ctx.Reply(fmt.
