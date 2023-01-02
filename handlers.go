@@ -58,4 +58,4 @@ func handleSet(ctx *ChatContext) {
 
 	// set on global config
 	vip.Set(param, value)
-	ctx.Reply(fmt.
+	ctx.Reply(fmt.Sprintf("%s set to: %s", param, vip.GetString(param
