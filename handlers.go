@@ -60,4 +60,8 @@ func handleSet(ctx *ChatContext) {
 	vip.Set(param, value)
 	ctx.Reply(fmt.Sprintf("%s set to: %s", param, vip.GetString(param)))
 
-	if param == "nick"
+	if param == "nick" {
+		ctx.Client.Cmd.Nick(value)
+	}
+
+	ctx.S
