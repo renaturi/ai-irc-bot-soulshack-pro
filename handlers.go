@@ -64,4 +64,7 @@ func handleSet(ctx *ChatContext) {
 		ctx.Client.Cmd.Nick(value)
 	}
 
-	ctx.S
+	ctx.Session.Reset()
+}
+
+func handleG
