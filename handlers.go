@@ -70,3 +70,5 @@ func handleSet(ctx *ChatContext) {
 func handleGet(ctx *ChatContext) {
 
 	tokens := ctx.Args
+	if len(tokens) < 2 {
+		ctx.Reply(fmt.Sprintf
