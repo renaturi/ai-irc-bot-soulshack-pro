@@ -67,4 +67,6 @@ func handleSet(ctx *ChatContext) {
 	ctx.Session.Reset()
 }
 
-func handleG
+func handleGet(ctx *ChatContext) {
+
+	tokens := ctx.Args
