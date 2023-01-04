@@ -75,4 +75,6 @@ func handleGet(ctx *ChatContext) {
 		return
 	}
 
-	param := tokens[1
+	param := tokens[1]
+	if _, ok := configParams[param]; !ok {
+		ctx.
