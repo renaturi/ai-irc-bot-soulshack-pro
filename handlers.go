@@ -77,4 +77,4 @@ func handleGet(ctx *ChatContext) {
 
 	param := tokens[1]
 	if _, ok := configParams[param]; !ok {
-		ctx.
+		ctx.Reply(fmt.Sprintf("Unknown parameter. Sup
