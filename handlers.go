@@ -71,4 +71,4 @@ func handleGet(ctx *ChatContext) {
 
 	tokens := ctx.Args
 	if len(tokens) < 2 {
-		ctx.Reply(fmt.Sprintf
+		ctx.Reply(fmt.Sprintf("Usage: /get %s", keysAsString(con
