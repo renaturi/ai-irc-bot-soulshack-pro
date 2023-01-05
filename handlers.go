@@ -82,4 +82,7 @@ func handleGet(ctx *ChatContext) {
 	}
 
 	value := vip.GetString(param)
-	ctx.Reply(fmt.Sprintf("%s: %s", param, va
+	ctx.Reply(fmt.Sprintf("%s: %s", param, value))
+}
+
+func handleSave(ctx *ChatContex
