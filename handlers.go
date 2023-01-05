@@ -77,4 +77,4 @@ func handleGet(ctx *ChatContext) {
 
 	param := tokens[1]
 	if _, ok := configParams[param]; !ok {
-		ctx.Reply(fmt.Sprintf("Unknown parameter. Sup
+		ctx.Reply(fmt.Sprintf("Unknown parameter. Supported parameters: %v", keysAsString(configPar
