@@ -89,4 +89,5 @@ func handleSave(ctx *ChatContext) {
 
 	tokens := ctx.Args
 	if !ctx.IsAdmin() {
-		ctx.Reply("You don't have permi
+		ctx.Reply("You don't have permission to perform this action.")
+		return
