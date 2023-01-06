@@ -88,4 +88,5 @@ func handleGet(ctx *ChatContext) {
 func handleSave(ctx *ChatContext) {
 
 	tokens := ctx.Args
-	if !ctx.IsAd
+	if !ctx.IsAdmin() {
+		ctx.Reply("You don't have permi
