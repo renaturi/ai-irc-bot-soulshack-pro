@@ -85,4 +85,7 @@ func handleGet(ctx *ChatContext) {
 	ctx.Reply(fmt.Sprintf("%s: %s", param, value))
 }
 
-func handleSave(ctx *ChatContex
+func handleSave(ctx *ChatContext) {
+
+	tokens := ctx.Args
+	if !ctx.IsAd
