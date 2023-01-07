@@ -94,4 +94,8 @@ func handleSave(ctx *ChatContext) {
 	}
 
 	if len(tokens) < 2 {
-		ctx.Reply
+		ctx.Reply("Usage: /save <name>")
+		return
+	}
+
+	f
