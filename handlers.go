@@ -101,3 +101,6 @@ func handleSave(ctx *ChatContext) {
 	filename := tokens[1]
 
 	v := vip.New()
+
+	v.Set("nick", ctx.Personality.Nick)
+	v.
