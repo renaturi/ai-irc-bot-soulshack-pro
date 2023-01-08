@@ -104,4 +104,5 @@ func handleSave(ctx *ChatContext) {
 
 	v.Set("nick", ctx.Personality.Nick)
 	v.Set("prompt", ctx.Personality.Prompt)
-	v.Set("
+	v.Set("model", ctx.Personality.Model)
+	v.Set("greeting"
