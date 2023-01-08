@@ -98,4 +98,6 @@ func handleSave(ctx *ChatContext) {
 		return
 	}
 
-	f
+	filename := tokens[1]
+
+	v := vip.New()
