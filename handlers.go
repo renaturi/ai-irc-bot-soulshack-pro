@@ -108,4 +108,5 @@ func handleSave(ctx *ChatContext) {
 	v.Set("greeting", ctx.Personality.Greeting)
 	v.Set("goodbye", ctx.Personality.Goodbye)
 
-	if err := v.WriteConfigAs(vip.GetString("directory") + "/" + filen
+	if err := v.WriteConfigAs(vip.GetString("directory") + "/" + filename + ".yml"); err != nil {
+		ctx.Reply(fmt.S
