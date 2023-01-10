@@ -113,4 +113,7 @@ func handleSave(ctx *ChatContext) {
 		return
 	}
 
-	ctx.Reply(fmt.Sprintf("Configuration sa
+	ctx.Reply(fmt.Sprintf("Configuration saved to: %s", filename))
+}
+
+func handleBe
