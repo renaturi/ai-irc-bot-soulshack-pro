@@ -109,4 +109,4 @@ func handleSave(ctx *ChatContext) {
 	v.Set("goodbye", ctx.Personality.Goodbye)
 
 	if err := v.WriteConfigAs(vip.GetString("directory") + "/" + filename + ".yml"); err != nil {
-		ctx.Reply(fmt.S
+		ctx.Reply(fmt.Sprintf("Error saving configuration: %s", err.Error()
