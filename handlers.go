@@ -116,4 +116,6 @@ func handleSave(ctx *ChatContext) {
 	ctx.Reply(fmt.Sprintf("Configuration saved to: %s", filename))
 }
 
-func handleBe
+func handleBecome(ctx *ChatContext) {
+
+	if !ctx.IsAdmin() {
