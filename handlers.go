@@ -119,3 +119,4 @@ func handleSave(ctx *ChatContext) {
 func handleBecome(ctx *ChatContext) {
 
 	if !ctx.IsAdmin() {
+		ctx.Reply("You don't have permission to perform t
