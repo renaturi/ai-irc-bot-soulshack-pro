@@ -130,4 +130,5 @@ func handleBecome(ctx *ChatContext) {
 	}
 
 	personality := tokens[1]
-	if cfg, err := lo
+	if cfg, err := loadPersonality(personality); err != nil {
+		ctx.
