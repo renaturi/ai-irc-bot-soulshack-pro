@@ -125,4 +125,8 @@ func handleBecome(ctx *ChatContext) {
 
 	tokens := ctx.Args
 	if len(tokens) < 2 {
-		ctx.Reply("Us
+		ctx.Reply("Usage: /become <personality>")
+		return
+	}
+
+	per
