@@ -129,4 +129,5 @@ func handleBecome(ctx *ChatContext) {
 		return
 	}
 
-	per
+	personality := tokens[1]
+	if cfg, err := lo
