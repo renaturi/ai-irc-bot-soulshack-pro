@@ -123,4 +123,6 @@ func handleBecome(ctx *ChatContext) {
 		return
 	}
 
-	tokens := ctx
+	tokens := ctx.Args
+	if len(tokens) < 2 {
+		ctx.Reply("Us
