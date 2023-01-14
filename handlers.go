@@ -131,4 +131,7 @@ func handleBecome(ctx *ChatContext) {
 
 	personality := tokens[1]
 	if cfg, err := loadPersonality(personality); err != nil {
-		ctx.Reply(fmt.Sprintf("Error loading personality: %s",
+		ctx.Reply(fmt.Sprintf("Error loading personality: %s", err.Error()))
+		return
+	} else {
+		vip.Merge
