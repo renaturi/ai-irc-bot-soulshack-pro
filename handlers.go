@@ -135,4 +135,7 @@ func handleBecome(ctx *ChatContext) {
 		return
 	} else {
 		vip.MergeConfigMap(cfg.AllSettings())
-		ctx.S
+		ctx.SetConfig(cfg)
+	}
+	ctx.Session.Reset()
+	log.Printf(
