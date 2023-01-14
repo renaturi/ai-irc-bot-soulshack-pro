@@ -134,4 +134,5 @@ func handleBecome(ctx *ChatContext) {
 		ctx.Reply(fmt.Sprintf("Error loading personality: %s", err.Error()))
 		return
 	} else {
-		vip.Merge
+		vip.MergeConfigMap(cfg.AllSettings())
+		ctx.S
