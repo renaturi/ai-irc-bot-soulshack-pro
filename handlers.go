@@ -138,4 +138,6 @@ func handleBecome(ctx *ChatContext) {
 		ctx.SetConfig(cfg)
 	}
 	ctx.Session.Reset()
-	log.Printf("changing nick to %s", ctx.Personality.Nic
+	log.Printf("changing nick to %s", ctx.Personality.Nick)
+
+	ctx.Client.Cmd.Nick(ctx.Personality.
