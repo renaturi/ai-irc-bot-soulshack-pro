@@ -145,4 +145,5 @@ func handleBecome(ctx *ChatContext) {
 	sendGreeting(ctx)
 }
 
-func handleList(ctx *Chat
+func handleList(ctx *ChatContext) {
+	personalities := listPersonalities
