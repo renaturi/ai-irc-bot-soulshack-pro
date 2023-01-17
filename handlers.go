@@ -142,4 +142,7 @@ func handleBecome(ctx *ChatContext) {
 
 	ctx.Client.Cmd.Nick(ctx.Personality.Nick)
 	time.Sleep(2 * time.Second)
-	sendGreeting
+	sendGreeting(ctx)
+}
+
+func handleList(ctx *Chat
