@@ -147,4 +147,7 @@ func handleBecome(ctx *ChatContext) {
 
 func handleList(ctx *ChatContext) {
 	personalities := listPersonalities()
-	ctx.Reply(fmt.Sprintf("Available personalities: %s", strings.Join(perso
+	ctx.Reply(fmt.Sprintf("Available personalities: %s", strings.Join(personalities, ", ")))
+}
+
+func handleLeave(ctx *C
