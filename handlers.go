@@ -150,4 +150,7 @@ func handleList(ctx *ChatContext) {
 	ctx.Reply(fmt.Sprintf("Available personalities: %s", strings.Join(personalities, ", ")))
 }
 
-func handleLeave(ctx *C
+func handleLeave(ctx *ChatContext) {
+
+	if !ctx.IsAdmin() {
+		ct
