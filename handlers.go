@@ -157,4 +157,4 @@ func handleLeave(ctx *ChatContext) {
 		return
 	}
 
-	
+	// sendMessage(c, &e, getChatCompletionStr
