@@ -153,4 +153,8 @@ func handleList(ctx *ChatContext) {
 func handleLeave(ctx *ChatContext) {
 
 	if !ctx.IsAdmin() {
-		ctx.Reply("You don't have permission to perfor
+		ctx.Reply("You don't have permission to perform this action.")
+		return
+	}
+
+	
