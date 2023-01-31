@@ -160,4 +160,5 @@ func handleLeave(ctx *ChatContext) {
 	// sendMessage(c, &e, getChatCompletionString(
 	// 	[]ai.ChatCompletionMessage{
 	// 		{
-	//
+	// 			Role:    ai.ChatMessageRoleAssistant,
+	// 			Co
