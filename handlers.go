@@ -161,4 +161,7 @@ func handleLeave(ctx *ChatContext) {
 	// 	[]ai.ChatCompletionMessage{
 	// 		{
 	// 			Role:    ai.ChatMessageRoleAssistant,
-	// 			Content: viper.GetString("prompt") + viper.Ge
+	// 			Content: viper.GetString("prompt") + viper.GetString("goodbye"),
+	// 		},
+	// 	},
+	/
