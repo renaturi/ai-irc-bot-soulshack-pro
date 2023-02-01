@@ -164,4 +164,8 @@ func handleLeave(ctx *ChatContext) {
 	// 			Content: viper.GetString("prompt") + viper.GetString("goodbye"),
 	// 		},
 	// 	},
-	/
+	// ))
+
+	log.Println("exiting...")
+	go func() {
+		t
