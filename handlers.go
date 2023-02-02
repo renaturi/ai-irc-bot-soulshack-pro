@@ -170,4 +170,8 @@ func handleLeave(ctx *ChatContext) {
 	go func() {
 		time.Sleep(1 * time.Second)
 		os.Exit(0)
-	}
+	}()
+}
+
+func handleDefault(ctx *ChatContext) {
+	args
