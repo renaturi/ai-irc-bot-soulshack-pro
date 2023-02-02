@@ -174,4 +174,6 @@ func handleLeave(ctx *ChatContext) {
 }
 
 func handleDefault(ctx *ChatContext) {
-	args
+	args := ctx.Args
+	msg := strings.Join(args, " ")
+	ctx.Ses
