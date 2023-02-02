@@ -168,4 +168,6 @@ func handleLeave(ctx *ChatContext) {
 
 	log.Println("exiting...")
 	go func() {
-		t
+		time.Sleep(1 * time.Second)
+		os.Exit(0)
+	}
