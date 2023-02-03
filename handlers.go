@@ -176,4 +176,4 @@ func handleLeave(ctx *ChatContext) {
 func handleDefault(ctx *ChatContext) {
 	args := ctx.Args
 	msg := strings.Join(args, " ")
-	ctx.Ses
+	ctx.Session.Message(ctx, ai.ChatMessageRoleUser, msg
