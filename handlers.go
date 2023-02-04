@@ -179,3 +179,4 @@ func handleDefault(ctx *ChatContext) {
 	ctx.Session.Message(ctx, ai.ChatMessageRoleUser, msg)
 	rch := ChatCompletionTask(ctx)
 	reply := spoolFromChannel(ctx, rch)
+	ctx.Session.Message(ctx, ai.ChatMessage
