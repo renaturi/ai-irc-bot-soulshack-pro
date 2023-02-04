@@ -185,4 +185,5 @@ func handleDefault(ctx *ChatContext) {
 func handleSay(ctx *ChatContext) {
 
 	if !ctx.IsAdmin() {
-		ctx.Reply("You 
+		ctx.Reply("You don't have permission to perform this action.")
+		return
