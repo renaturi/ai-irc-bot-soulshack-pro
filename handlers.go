@@ -182,4 +182,7 @@ func handleDefault(ctx *ChatContext) {
 	ctx.Session.Message(ctx, ai.ChatMessageRoleAssistant, *reply)
 }
 
-func handleSay(ctx *Cha
+func handleSay(ctx *ChatContext) {
+
+	if !ctx.IsAdmin() {
+		ctx.Reply("You 
