@@ -190,4 +190,4 @@ func handleSay(ctx *ChatContext) {
 	}
 
 	if len(ctx.Args) < 2 {
-		ctx.
+		ctx.Reply("Usage: /say [/as <personalit
