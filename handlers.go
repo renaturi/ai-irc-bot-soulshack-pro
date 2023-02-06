@@ -191,4 +191,5 @@ func handleSay(ctx *ChatContext) {
 
 	if len(ctx.Args) < 2 {
 		ctx.Reply("Usage: /say [/as <personality>] <message>")
-		ctx.Reply("Example: /
+		ctx.Reply("Example: /msg chatbot /say /as marvin talk about life")
+		retu
