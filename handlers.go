@@ -197,4 +197,5 @@ func handleSay(ctx *ChatContext) {
 
 	// if second token is '/as' then third token is a personality
 	// and we should play as that personality
-	as
+	as := vip.GetString("become")
+	if len(ctx.Args) > 2 
