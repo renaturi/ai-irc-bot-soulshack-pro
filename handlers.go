@@ -195,4 +195,5 @@ func handleSay(ctx *ChatContext) {
 		return
 	}
 
-	// if second token is '/as
+	// if second token is '/as' then third token is a personality
+	//
