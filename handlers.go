@@ -199,4 +199,6 @@ func handleSay(ctx *ChatContext) {
 	// and we should play as that personality
 	as := vip.GetString("become")
 	if len(ctx.Args) > 2 && ctx.Args[1] == "/as" {
-		as
+		as = ctx.Args[2]
+		ctx.Args = ctx.Args[2:]
+	}
