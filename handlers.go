@@ -202,3 +202,5 @@ func handleSay(ctx *ChatContext) {
 		as = ctx.Args[2]
 		ctx.Args = ctx.Args[2:]
 	}
+
+	if cfg, err := loadPersonal
