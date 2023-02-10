@@ -203,4 +203,5 @@ func handleSay(ctx *ChatContext) {
 		ctx.Args = ctx.Args[2:]
 	}
 
-	if cfg, err := loadPersonal
+	if cfg, err := loadPersonality(as); err != nil {
+		ctx.Reply(fmt
