@@ -204,4 +204,4 @@ func handleSay(ctx *ChatContext) {
 	}
 
 	if cfg, err := loadPersonality(as); err != nil {
-		ctx.Reply(fmt
+		ctx.Reply(fmt.Sprintf("Error loading personality: %s", e
