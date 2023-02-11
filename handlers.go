@@ -207,4 +207,7 @@ func handleSay(ctx *ChatContext) {
 		ctx.Reply(fmt.Sprintf("Error loading personality: %s", err.Error()))
 		return
 	} else {
-		ctx.SetConf
+		ctx.SetConfig(cfg)
+	}
+
+	ctx.Session = sess
