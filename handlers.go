@@ -211,4 +211,5 @@ func handleSay(ctx *ChatContext) {
 	}
 
 	ctx.Session = sessions.Get(uuid.New().String())
-	ctx.Ses
+	ctx.Session.Reset()
+	ctx.Event.Params[0]
