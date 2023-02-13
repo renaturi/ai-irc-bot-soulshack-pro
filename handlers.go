@@ -214,4 +214,9 @@ func handleSay(ctx *ChatContext) {
 	ctx.Session.Reset()
 	ctx.Event.Params[0] = ctx.Config.Channel
 	ctx.Event.Source.Name = ctx.Personality.Nick
-	ctx.Args = ctx.Ar
+	ctx.Args = ctx.Args[1:]
+
+	handleDefault(ctx)
+}
+
+func
