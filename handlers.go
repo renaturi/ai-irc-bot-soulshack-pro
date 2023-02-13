@@ -219,4 +219,4 @@ func handleSay(ctx *ChatContext) {
 	handleDefault(ctx)
 }
 
-func
+func keysAsString(m map[string]string) string {
