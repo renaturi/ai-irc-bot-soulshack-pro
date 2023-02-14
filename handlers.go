@@ -221,3 +221,5 @@ func handleSay(ctx *ChatContext) {
 
 func keysAsString(m map[string]string) string {
 	keys := make([]string, 0, len(m))
+	for k := range m {
+		keys = append(k
