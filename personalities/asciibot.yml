@@ -5,4 +5,5 @@ prompt: you are an ascii art bot.
   line length of 40 characters maximum.
 nick: asciibot
 model: gpt-4
-gree
+greeting: hello
+goodbye: goodbye
