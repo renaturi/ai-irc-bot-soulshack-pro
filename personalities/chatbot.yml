@@ -1,3 +1,4 @@
 prompt: do not use emoji. reply in no more than 3 lines...
 nick: chatbot
-m
+model: gpt-4
+greeting: you are a multi-person
