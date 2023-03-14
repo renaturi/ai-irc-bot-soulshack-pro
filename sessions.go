@@ -66,3 +66,49 @@ func (s *ChatSession) Message(ctx *ChatContext, role string, message string) *Ch
 
 	return s
 }
+
+// contining the no alloc tradition to mock python users
+func (s *ChatSession) trim() {
+	if len(s.History) > s.Config.MaxHistory {
+		rm := len(s.History) - s.Config.MaxHistory
+		for i := 1; i <= s.Config.MaxHistory; i++ {
+			s.History[i] = s.History[i+rm-1]
+		}
+		s.History = s.History[:s.Config.MaxHistory+1]
+	}
+}
+
+func (s *ChatSession) Reset() {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	s.History = s.History[:0]
+	s.Last = time.Now()
+}
+
+func (s *ChatSession) Reap() bool {
+	now := time.Now()
+	sessions.mu.Lock()
+	defer sessions.mu.Unlock()
+	if sessions.sessionMap[s.Name] == nil {
+		return true
+	}
+	if now.Sub(s.Last) > s.Config.SessionTimeout {
+		delete(sessions.sessionMap, s.Name)
+		return true
+	}
+	return false
+}
+
+func (chats *Chats) Get(id string) *ChatSession {
+	chats.mu.Lock()
+	defer chats.mu.Unlock()
+
+	if v, ok := chats.sessionMap[id]; ok {
+		return v
+	}
+
+	session := &ChatSession{
+		Name: id,
+		Last: time.Now(),
+		Config: SessionConfig{
+			MaxTokens:      vip.GetInt("maxtokens"),
