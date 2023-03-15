@@ -112,3 +112,41 @@ func (chats *Chats) Get(id string) *ChatSession {
 		Last: time.Now(),
 		Config: SessionConfig{
 			MaxTokens:      vip.GetInt("maxtokens"),
+			SessionTimeout: vip.GetDuration("session"),
+			MaxHistory:     vip.GetInt("history"),
+			ClientTimeout:  vip.GetDuration("timeout"),
+			Chunkdelay:     vip.GetDuration("chunkdelay"),
+			Chunkmax:       vip.GetInt("chunkmax"),
+		},
+	}
+
+	// start session reaper, returns when the session is gone
+	go func() {
+		for {
+			time.Sleep(session.Config.SessionTimeout)
+			if session.Reap() {
+				log.Println("session reaped:", session.Name)
+				return
+			}
+		}
+	}()
+
+	chats.sessionMap[id] = session
+	return session
+}
+
+// show string of all msg contents
+func (s *ChatSession) Debug() {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	for _, msg := range s.History {
+		ds := ""
+		if msg.Role == ai.ChatMessageRoleAssistant {
+			ds += "< "
+		} else {
+			ds += "> "
+		}
+		ds += fmt.Sprintf("%s:%s", msg.Role, msg.Content)
+		log.Println(ds)
+	}
+}
