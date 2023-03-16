@@ -93,3 +93,41 @@ func TestSessionConcurrency(t *testing.T) {
 		wg.Add(concurrentUsers)
 
 		for i := 0; i < concurrentUsers; i++ {
+			go func(userIndex int) {
+				defer wg.Done()
+				sessionID := fmt.Sprintf("usersession%d", userIndex)
+				session := sessions.Get(sessionID)
+
+				for j := 0; j < messagesPerUser; j++ {
+					session.Message(ctx, ai.ChatMessageRoleUser, fmt.Sprintf("User %d message %d", userIndex, j))
+					session.Message(ctx, ai.ChatMessageRoleAssistant, fmt.Sprintf("Assistant response to user %d message %d", userIndex, j))
+				}
+			}(i)
+		}
+
+		wg.Wait()
+
+		for i := 0; i < concurrentUsers; i++ {
+			sessionID := fmt.Sprintf("usersession%d", i)
+			session := sessions.Get(sessionID)
+			assert.Len(t, session.History, messagesPerUser*2+1, "Each session should have the correct number of messages")
+		}
+		elapsedTime := time.Since(startTime)
+		totalMessages := concurrentUsers * messagesPerUser * 2
+		messagesPerSecond := float64(totalMessages) / elapsedTime.Seconds()
+		t.Logf("Processed %d messages in %v, which is %.2f messages per second\n", totalMessages, elapsedTime, messagesPerSecond)
+	})
+}
+
+func TestSingleSessionConcurrency(t *testing.T) {
+	log.SetOutput(io.Discard)
+
+	t.Run("Test single session concurrency", func(t *testing.T) {
+		vip.Set("session", 1*time.Hour)
+		vip.Set("history", 500*200)
+
+		ctx := &ChatContext{
+			Personality: &Personality{
+				Prompt: "You are a helpful assistant.",
+			},
+		}
