@@ -131,3 +131,32 @@ func TestSingleSessionConcurrency(t *testing.T) {
 				Prompt: "You are a helpful assistant.",
 			},
 		}
+
+		const concurrentUsers = 500
+		const messagesPerUser = 100
+
+		startTime := time.Now()
+
+		session := sessions.Get("concurrentSession")
+
+		var wg sync.WaitGroup
+		wg.Add(concurrentUsers)
+
+		for i := 0; i < concurrentUsers; i++ {
+			go func(userIndex int) {
+				defer wg.Done()
+				for j := 0; j < messagesPerUser; j++ {
+					session.Message(ctx, ai.ChatMessageRoleUser, fmt.Sprintf("User %d message %d", userIndex, j))
+					session.Message(ctx, ai.ChatMessageRoleAssistant, fmt.Sprintf("Assistant response to user %d message %d", userIndex, j))
+				}
+			}(i)
+		}
+
+		wg.Wait()
+
+		elapsedTime := time.Since(startTime)
+		totalMessages := concurrentUsers * messagesPerUser * 2
+		messagesPerSecond := float64(totalMessages) / elapsedTime.Seconds()
+
+		assert.Len(t, session.History, totalMessages+1, "The session should have the correct number of messages")
+		t.Logf("Processed %d messages in %v, which is %.2f messages per second\n", totalMessages, elapsedTime, messagesPerSecond)
