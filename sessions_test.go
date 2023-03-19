@@ -215,3 +215,49 @@ func TestSessionReapStress(t *testing.T) {
 	// wait for the unfreshened half to time out
 	time.Sleep(55 * time.Millisecond)
 	activeSessions := countActiveSessions()
+
+	expectedActiveSessions := numSessions / 2
+	if activeSessions != expectedActiveSessions {
+		t.Fatalf("Expected %d active sessions, got %d", expectedActiveSessions, activeSessions)
+	}
+
+}
+
+func TestSessionWindow(t *testing.T) {
+	testCases := []struct {
+		name       string
+		history    []ai.ChatCompletionMessage
+		maxHistory int
+		expected   []ai.ChatCompletionMessage
+	}{
+		{
+			name: "Simple_case",
+			history: []ai.ChatCompletionMessage{
+				{Role: ai.ChatMessageRoleUser, Content: "Prompt"},
+				{Role: ai.ChatMessageRoleUser, Content: "Message 1"},
+				{Role: ai.ChatMessageRoleUser, Content: "Message 2"},
+				{Role: ai.ChatMessageRoleUser, Content: "Message 3"},
+				{Role: ai.ChatMessageRoleUser, Content: "Message 4"},
+			},
+			maxHistory: 2,
+			expected: []ai.ChatCompletionMessage{
+				{Role: ai.ChatMessageRoleUser, Content: "Prompt"},
+				{Role: ai.ChatMessageRoleUser, Content: "Message 3"},
+				{Role: ai.ChatMessageRoleUser, Content: "Message 4"},
+			},
+		},
+		// Add more test cases if needed
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			session := ChatSession{
+				History: tc.history,
+				Config:  SessionConfig{MaxHistory: tc.maxHistory},
+			}
+
+			session.trim()
+
+			if len(session.History) != len(tc.expected) {
+				t.Errorf("Expected history length to be %d, but got %d", len(tc.expected), len(session.History))
+			}
