@@ -261,3 +261,43 @@ func TestSessionWindow(t *testing.T) {
 			if len(session.History) != len(tc.expected) {
 				t.Errorf("Expected history length to be %d, but got %d", len(tc.expected), len(session.History))
 			}
+
+			for i, msg := range session.History {
+				if msg.Role != tc.expected[i].Role || msg.Content != tc.expected[i].Content {
+					t.Errorf("Expected message at index %d to be %+v, but got %+v", i, tc.expected[i], msg)
+				}
+			}
+		})
+	}
+}
+func BenchmarkTrim(b *testing.B) {
+	testCases := []int{100, 1000, 10000, 20000}
+	for _, msgCount := range testCases {
+		messages := make([]ai.ChatCompletionMessage, msgCount)
+		for i := 0; i < msgCount; i++ {
+			messages[i] = ai.ChatCompletionMessage{Role: ai.ChatMessageRoleUser, Content: fmt.Sprintf("Message %d", i)}
+		}
+		b.Run(fmt.Sprintf("MsgCount_%d", msgCount), func(b *testing.B) {
+			session := ChatSession{
+				History: messages,
+				Config:  SessionConfig{MaxHistory: msgCount / 2},
+			}
+
+			b.ResetTimer()
+
+			for i := 0; i < b.N; i++ {
+				session.trim()
+			}
+		})
+	}
+}
+
+func BenchmarkSessionStress(b *testing.B) {
+	vip.Set("session", 1*time.Second) // Short session duration to trigger more expirations
+	vip.Set("history", 5)             // Shorter history length to trigger more trimming
+
+	ctx := &ChatContext{
+		Personality: &Personality{
+			Prompt: "You are a helpful assistant.",
+		},
+	}
