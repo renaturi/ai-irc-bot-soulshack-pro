@@ -301,3 +301,51 @@ func BenchmarkSessionStress(b *testing.B) {
 			Prompt: "You are a helpful assistant.",
 		},
 	}
+	log.SetOutput(io.Discard)
+
+	concurrentUsers := []int{10, 100, 1000}
+	for _, concurrentUsers := range concurrentUsers {
+
+		b.Run(fmt.Sprintf("SessionStress_%d", concurrentUsers), func(b *testing.B) {
+
+			for i := 0; i < b.N; i++ {
+
+				const sessionsPerUser = 50
+				const messagesPerUser = 50
+
+				var wg sync.WaitGroup
+				wg.Add(concurrentUsers)
+
+				for i := 0; i < concurrentUsers; i++ {
+					go func(userIndex int) {
+						defer wg.Done()
+
+						for k := 0; k < sessionsPerUser; k++ {
+							sessionID := fmt.Sprintf("session%d-%d", userIndex, k)
+							session := sessions.Get(sessionID)
+
+							action := rand.Intn(4)
+
+							switch action {
+							case 0: // Add user message
+								for j := 0; j < messagesPerUser; j++ {
+									session.Message(ctx, ai.ChatMessageRoleUser, fmt.Sprintf("User %d message %d", userIndex, j))
+								}
+							case 1: // Add assistant message
+								for j := 0; j < messagesPerUser; j++ {
+									session.Message(ctx, ai.ChatMessageRoleAssistant, fmt.Sprintf("Assistant response to user %d message %d", userIndex, j))
+								}
+							case 2: // Reset the session
+								session.Reset()
+							case 3: // Expire the session
+								session.Reap()
+							}
+						}
+					}(i)
+				}
+
+				wg.Wait()
+			}
+		})
+	}
+}
