@@ -81,3 +81,49 @@ func run(r *cobra.Command, _ []string) {
 		time.Sleep(1 * time.Second)
 		sendGreeting(ctx)
 	})
+
+	irc.Handlers.AddBg(girc.PRIVMSG, func(c *girc.Client, e girc.Event) {
+
+		ctx, cancel := CreateChatContext(context.Background(), aiClient, vip.GetViper(), c, &e)
+		defer cancel()
+
+		if ctx.Valid() {
+			log.Println(">>", strings.Join(e.Params[1:], " "))
+			switch ctx.GetCommand() {
+			case "/say":
+				handleSay(ctx)
+			case "/set":
+				handleSet(ctx)
+			case "/get":
+				handleGet(ctx)
+			case "/save":
+				handleSave(ctx)
+			case "/list":
+				handleList(ctx)
+			case "/become":
+				handleBecome(ctx)
+			case "/leave":
+				handleLeave(ctx)
+			case "/help":
+				fallthrough
+			case "/?":
+				ctx.Reply("Supported commands: /set, /say [/as], /get, /list, /become, /leave, /help, /version")
+			case "/version":
+				ctx.Reply(r.Version)
+			default:
+				handleDefault(ctx)
+			}
+		}
+	})
+
+	for {
+		log.Println("connecting to server:", vip.GetString("server"), "port:", vip.GetInt("port"), "ssl:", vip.GetBool("ssl"))
+		if err := irc.Connect(); err != nil {
+			log.Println(err)
+			log.Println("reconnecting in 5 seconds...")
+			time.Sleep(5 * time.Second)
+		} else {
+			return
+		}
+	}
+}
